@@ -1,5 +1,5 @@
 {
-    "name": "msgphp/domain",
+    "name": "fafnir999/domain",
     "type": "library",
     "description": "A dependency-free package to help building a business domain layer",
     "keywords": [
@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": "^7.2"
+        "php": "*"
     },
     "require-dev": {
         "doctrine/orm": "^2.6",

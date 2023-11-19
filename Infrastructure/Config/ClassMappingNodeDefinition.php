@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MsgPhp\Domain\Infrastructure\Config;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder as BaseNodeBuilder;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeParentInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface;
 use Symfony\Component\Config\Definition\Builder\VariableNodeDefinition;
 use Symfony\Component\Config\Definition\NodeInterface;
 use Symfony\Component\Config\Definition\PrototypeNodeInterface;
+use Symfony\Component\Config\Definition\VariableNode;
 
 /**
  * @author Roland Franssen <franssen.roland@gmail.com>
@@ -145,7 +147,7 @@ final class ClassMappingNodeDefinition extends VariableNodeDefinition implements
         throw new \BadMethodCallException('Method "'.__METHOD__.'" is not applicable.');
     }
 
-    public function append(NodeDefinition $node): self
+    public function append(NodeDefinition $node): static
     {
         throw new \BadMethodCallException('Method "'.__METHOD__.'" is not applicable.');
     }
@@ -163,7 +165,7 @@ final class ClassMappingNodeDefinition extends VariableNodeDefinition implements
     /**
      * @return null|ArrayNodeDefinition|BaseNodeBuilder|NodeBuilder|NodeDefinition|NodeParentInterface|self|VariableNodeDefinition
      */
-    public function end()
+    public function end(): NodeParentInterface|NodeBuilder|NodeDefinition|ArrayNodeDefinition|VariableNodeDefinition|null
     {
         return $this->parent;
     }
@@ -171,17 +173,17 @@ final class ClassMappingNodeDefinition extends VariableNodeDefinition implements
     /**
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
-    protected function instantiateNode(): ClassMappingNode
+    protected function instantiateNode(): VariableNode
     {
-        return new ClassMappingNode($this->name, $this->parent instanceof NodeInterface ? $this->parent : null, $this->pathSeparator ?? '.');
+        return new VariableNode($this->name, $this->parent, $this->pathSeparator);
     }
 
     protected function createNode(): NodeInterface
     {
         /** @var ClassMappingNode $node */
         $node = parent::createNode();
-        $node->setKeyAttribute('class');
-        $node->setHints($this->hints);
+        $node->setAttribute('key', 'class');
+//        $node->setHints($this->hints);
 
         $prototype = $this->getPrototype();
         /** @psalm-suppress InvalidPropertyAssignmentValue */
@@ -192,7 +194,7 @@ final class ClassMappingNodeDefinition extends VariableNodeDefinition implements
             throw new \LogicException('Prototyped node must be an instance of "'.PrototypeNodeInterface::class.'", got "'.\get_class($prototypedNode).'".');
         }
 
-        $node->setPrototype($prototypedNode);
+//        $node->setPrototype($prototypedNode);
 
         return $node;
     }

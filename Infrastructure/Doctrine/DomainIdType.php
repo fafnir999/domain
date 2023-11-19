@@ -7,6 +7,7 @@ namespace MsgPhp\Domain\Infrastructure\Doctrine;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\Types;
 use MsgPhp\Domain\DomainId;
 
 /**
@@ -96,7 +97,7 @@ abstract class DomainIdType extends Type
         if ($value instanceof DomainId) {
             $class = \get_class($value);
             /** @psalm-suppress DeprecatedConstant */
-            $type = Type::INTEGER;
+            $type = Types::INTEGER;
 
             foreach (self::$mapping as $mapping) {
                 if (($mapping['class'] ?? null) === $class) {

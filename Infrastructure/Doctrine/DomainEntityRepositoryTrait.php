@@ -24,7 +24,7 @@ trait DomainEntityRepositoryTrait
 {
     /** @var class-string */
     private $class;
-    private $em;
+    private EntityManagerInterface $em;
     /** @var null|string */
     private $alias;
 

@@ -13,7 +13,7 @@ use MsgPhp\Domain\Event\Enable;
 trait CanBeEnabled
 {
     /** @var bool */
-    private $enabled = false;
+    protected $enabled = false;
 
     public function isEnabled(): bool
     {

@@ -10,7 +10,7 @@ namespace MsgPhp\Domain\Model;
 trait LastUpdatedAtField
 {
     /** @var \DateTimeInterface */
-    private $lastUpdatedAt;
+    protected $lastUpdatedAt;
 
     public function getLastUpdatedAt(): \DateTimeInterface
     {

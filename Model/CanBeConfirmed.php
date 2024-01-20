@@ -12,9 +12,9 @@ use MsgPhp\Domain\Event\Confirm;
 trait CanBeConfirmed
 {
     /** @var null|string */
-    private $confirmationToken;
+    protected $confirmationToken;
     /** @var null|\DateTimeInterface */
-    private $confirmedAt;
+    protected $confirmedAt;
 
     public function getConfirmationToken(): ?string
     {

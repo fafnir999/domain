@@ -10,7 +10,7 @@ namespace MsgPhp\Domain\Model;
 trait CreatedAtField
 {
     /** @var \DateTimeInterface */
-    private $createdAt;
+    protected $createdAt;
 
     public function getCreatedAt(): \DateTimeInterface
     {

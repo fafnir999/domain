@@ -23,7 +23,7 @@ use MsgPhp\Domain\GenericDomainCollection;
 trait DomainEntityRepositoryTrait
 {
     /** @var class-string */
-    private $class;
+    protected $class;
     private EntityManagerInterface $em;
     /** @var null|string */
     private $alias;

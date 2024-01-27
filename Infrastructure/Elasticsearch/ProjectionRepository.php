@@ -17,9 +17,9 @@ final class ProjectionRepository implements BaseProjectionRepository
     private $prefix;
     private $bulkLimit;
 
-    public function __construct(Client $client, string $prefix, int $bulkLimit = 1000)
+    public function __construct(string $prefix = '', int $bulkLimit = 1000)
     {
-        $this->client = $client;
+//        $this->client = $client;
         $this->prefix = $prefix;
         $this->bulkLimit = $bulkLimit;
     }

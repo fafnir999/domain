@@ -25,9 +25,9 @@ final class ProjectionTypeRegistry implements BaseProjectionTypeRegistry
     /**
      * @param array<string, array> $mappings
      */
-    public function __construct(Client $client, string $prefix, array $mappings, array $settings = [], ?LoggerInterface $logger = null)
+    public function __construct()
     {
-        $this->client = $client;
+//        $this->client = $client;
         $this->prefix = $prefix;
         $this->mappings = $mappings;
         $this->settings = $settings;
